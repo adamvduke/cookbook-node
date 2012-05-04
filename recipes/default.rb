@@ -18,6 +18,7 @@
 #
 
 include_recipe "git"
+include_recipe "build-essential"
 
 [ "curl"].each do |pkg|
   package pkg do
@@ -53,13 +54,3 @@ bash "compile_nodejs_source" do
     git show -s --format=%H > /usr/local/share/node_version
   EOH
 end
-
-
-bash "install_npm" do
-  user "root"
-    cwd "/tmp/"
-    code <<-EOH
-    curl http://npmjs.org/install.sh | clean=no sh
-    EOH
-end
-
